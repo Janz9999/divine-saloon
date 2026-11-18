@@ -1,0 +1,94 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Helpers ──
+    function signedIn() { return request.auth != null; }
+    function role() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
+    }
+    function isManager() { return signedIn() && role() == 'manager'; }
+    function isStaff()   { return signedIn() && role() in ['manager', 'worker']; }
+    function onlyChanges(fields) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(fields);
+    }
+    function ownsBooking(ref) {
+      return signedIn() && exists(/databases/$(database)/documents/bookings/$(ref))
+          && get(/databases/$(database)/documents/bookings/$(ref)).data.customerUid == request.auth.uid;
+    }
+
+    // User profiles. People can create their own, but only as a customer,
+    // and can never change their own role.
+    match /users/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow create: if signedIn() && request.auth.uid == uid
+                    && request.resource.data.role == 'customer';
+      allow update: if signedIn() && request.auth.uid == uid
+                    && request.resource.data.role == resource.data.role;
+    }
+
+    // Deposit payments. Only the Cloud Functions (admin access) write these,
+    // so nobody can mark their own payment as "paid".
+    match /payments/{paymentId} {
+      allow read: if signedIn() && resource.data.uid == request.auth.uid;
+      allow write: if false;
+    }
+
+    // Bookings. Created ONLY by the stripeWebhook function after payment.
+    match /bookings/{ref} {
+      allow read: if isStaff()
+                  || (signedIn() && resource.data.customerUid == request.auth.uid);
+      allow create, delete: if false;
+      allow update: if
+          // Manager: accept / decline / cancel.
+          (isManager() && onlyChanges(['status']))
+          // Worker: mark as done.
+          || (isStaff() && onlyChanges(['doneAt', 'doneBy', 'doneNotes']))
+          // Customer: cancel their own booking, or move its date / time.
+          || (signedIn() && resource.data.customerUid == request.auth.uid
+              && onlyChanges(['status', 'date', 'time'])
+              && request.resource.data.status in [resource.data.status, 'cancelled']);
+    }
+
+    // Manager's Alerts feed.
+    match /activity/{id} {
+      allow read: if isStaff();
+      // Staff log anything; customers only about their own bookings.
+      allow create: if isStaff()
+                    || (request.resource.data.bookingRef is string
+                        && ownsBooking(request.resource.data.bookingRef)
+                        && request.resource.data.kind in ['cancelled', 'rescheduled']);
+      allow update: if isStaff() && onlyChanges(['read']);
+      allow delete: if false;
+    }
+
+    // Salon → customer messages.
+    match /messages/{id} {
+      allow read: if isStaff()
+                  || (signedIn() && resource.data.customerUid == request.auth.uid);
+      allow create: if isStaff();
+      allow update: if signedIn() && resource.data.customerUid == request.auth.uid
+                    && onlyChanges(['readByCustomer']);
+      allow delete: if false;
+    }
+
+    // Salon photo gallery: everyone signed in can look; only the manager posts.
+    match /gallery/{id} {
+      allow read: if signedIn();
+      allow create, update: if isManager()
+                            && request.resource.data.category is string
+                            && (request.resource.data.url is string || request.resource.data.url == null);
+      allow delete: if isManager();
+    }
+
+    // Manager-only: calendar events, expenses, one-off flags (e.g. gallery seeded).
+    match /events/{id}   { allow read, write: if isManager(); }
+    match /expenses/{id} { allow read, write: if isManager(); }
+    match /meta/{id}     { allow read, write: if isManager(); }
+
+    // Booking-number counter: server only.
+    match /counters/{id} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "455268442209",
+    "project_id": "divine-saloon",
+    "storage_bucket": "divine-saloon.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:455268442209:android:342d5a22e20533aeb10a20",
+        "android_client_info": {
+          "package_name": "com.example.salon_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgsC3dENW7xbEYVwb3kPhN1H0-V2OtWNg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

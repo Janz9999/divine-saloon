@@ -3,6 +3,8 @@
 // The one place for the app's colours. Change a value here and every
 // customer screen follows.
 
+import 'app_text.dart';
+
 import 'package:flutter/material.dart';
 
 class AppColors {
@@ -60,6 +62,8 @@ ThemeData buildAppTheme() {
   return ThemeData(
     useMaterial3: true,
     colorScheme: scheme,
+    fontFamily:
+        AppFonts.body, // Inter everywhere; headings use AppFonts.heading
     scaffoldBackgroundColor: AppColors.bg,
     canvasColor: AppColors.bg,
     dividerColor: AppColors.border,
@@ -75,10 +79,7 @@ ThemeData buildAppTheme() {
       surfaceTintColor: Colors.transparent,
       elevation: 0,
     ),
-    textTheme: ThemeData.light().textTheme.apply(
-      bodyColor: AppColors.text,
-      displayColor: AppColors.text,
-    ),
+    textTheme: buildAppTextTheme(ThemeData.light().textTheme, AppColors.text),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: AppColors.surface,
@@ -113,7 +114,10 @@ ThemeData buildAppTheme() {
     ),
     snackBarTheme: const SnackBarThemeData(
       backgroundColor: AppColors.text,
-      contentTextStyle: TextStyle(color: Colors.white),
+      contentTextStyle: TextStyle(
+        fontFamily: AppFonts.body,
+        color: Colors.white,
+      ),
     ),
     dialogTheme: const DialogThemeData(
       backgroundColor: AppColors.bg,

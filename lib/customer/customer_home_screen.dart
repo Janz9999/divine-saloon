@@ -8,6 +8,7 @@ import 'profile/profile_ui.dart' show openProfile;
 import 'activity_screen.dart';
 import 'category_detail_screen.dart';
 import 'profile/profile_store.dart';
+import '../theme/app_text.dart';
 
 class CustomerHomeScreen extends StatelessWidget {
   const CustomerHomeScreen({super.key});
@@ -65,8 +66,9 @@ class CustomerHomeScreen extends StatelessWidget {
                                 return Text(
                                   name.isEmpty ? 'Hello,' : 'Hello $name,',
                                   style: TextStyle(
+                                    fontFamily: AppFonts.heading,
                                     fontSize: 26,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w400,
                                     color: Colors.black,
                                   ),
                                 );
@@ -144,8 +146,9 @@ class CustomerHomeScreen extends StatelessWidget {
                                 const Text(
                                   'Get Special\nDiscount\nUp to 40%',
                                   style: TextStyle(
+                                    fontFamily: AppFonts.heading,
                                     fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w400,
                                     color: Colors.black,
                                     height: 1.2,
                                   ),
@@ -205,8 +208,9 @@ class CustomerHomeScreen extends StatelessWidget {
                         Text(
                           'Services',
                           style: TextStyle(
+                            fontFamily: AppFonts.heading,
                             fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w400,
                             color: Colors.black,
                           ),
                         ),

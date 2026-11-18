@@ -9,6 +9,7 @@ import '../customer/booking_store.dart';
 import 'manager_booking_screens.dart';
 import 'manager_store.dart';
 import 'manager_ui.dart';
+import '../theme/app_text.dart';
 
 class ManagerCalendarScreen extends StatefulWidget {
   /// Worker mode: only confirmed bookings, different title, and tapping a
@@ -150,8 +151,9 @@ class _ManagerCalendarScreenState extends State<ManagerCalendarScreen> {
                     child: Text(
                       '${mMonthsLong[_month.month - 1]} ${_month.year}',
                       style: const TextStyle(
+                        fontFamily: AppFonts.heading,
                         fontSize: 24,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w400,
                         color: MColors.text,
                       ),
                     ),
@@ -198,8 +200,9 @@ class _ManagerCalendarScreenState extends State<ManagerCalendarScreen> {
                   child: Text(
                     '${mWeekdaysLong[s.weekday - 1]}, ${s.day} ${mMonthsShort[s.month - 1]}',
                     style: const TextStyle(
+                      fontFamily: AppFonts.heading,
                       fontSize: 21,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w400,
                       color: MColors.text,
                     ),
                   ),

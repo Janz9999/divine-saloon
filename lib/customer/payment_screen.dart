@@ -32,6 +32,7 @@ import 'profile/profile_ui.dart' show openProfile;
 import 'activity_screen.dart';
 import 'booking_store.dart';
 import 'profile/profile_store.dart';
+import '../theme/app_text.dart';
 
 /// Must match the region in functions/index.js.
 const String _functionsRegion = 'europe-west2';
@@ -321,8 +322,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
               const Text(
                 'Pay your deposit',
                 style: TextStyle(
+                  fontFamily: AppFonts.heading,
                   fontSize: 28,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w400,
                   color: _text,
                   height: 1.15,
                 ),

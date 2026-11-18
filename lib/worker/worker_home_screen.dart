@@ -9,6 +9,7 @@ import '../customer/booking_store.dart';
 import '../manager/manager_ui.dart' show callCustomer, sameDay, dayOnly;
 import 'worker_mark_done_screen.dart';
 import 'worker_ui.dart';
+import '../theme/app_text.dart';
 
 class WorkerHomeScreen extends StatefulWidget {
   final VoidCallback onOpenAlerts;
@@ -442,6 +443,7 @@ class _BookingCard extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 18),
                           shape: const StadiumBorder(),
                           textStyle: const TextStyle(
+                            fontFamily: AppFonts.body,
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
                           ),

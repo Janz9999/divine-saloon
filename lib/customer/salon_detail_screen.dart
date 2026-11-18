@@ -6,6 +6,7 @@ import 'customer_nav.dart';
 import 'profile/profile_ui.dart' show openProfile;
 import 'activity_screen.dart';
 import 'gallery_store.dart';
+import '../theme/app_text.dart';
 
 class SalonDetailScreen extends StatefulWidget {
   const SalonDetailScreen({super.key});
@@ -82,8 +83,9 @@ class _SalonDetailScreenState extends State<SalonDetailScreen> {
                           const Text(
                             'Divine Aesthetics & Beauty',
                             style: TextStyle(
+                              fontFamily: AppFonts.heading,
                               fontSize: 22,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w400,
                               color: Colors.black,
                             ),
                           ),

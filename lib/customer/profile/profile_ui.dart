@@ -7,13 +7,12 @@ import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
 import '../customer_nav.dart';
 
-import 'package:google_fonts/google_fonts.dart';
-
 import '../activity_screen.dart';
 import '../customer_home_screen.dart';
 import '../salon_detail_screen.dart';
 import 'profile_screen.dart';
 import 'profile_store.dart';
+import '../../theme/app_text.dart';
 
 class PColors {
   static const bg = AppColors.bg;
@@ -26,13 +25,9 @@ class PColors {
   static const border = AppColors.border;
 }
 
+/// Profile headings — same as the app-wide heading style (Playfair Display).
 TextStyle serif(double size, {Color color = PColors.text}) =>
-    GoogleFonts.playfairDisplay(
-      fontSize: size,
-      color: color,
-      fontWeight: FontWeight.w400,
-      height: 1.2,
-    );
+    heading(size, color: color);
 
 const List<String> monthsShort = [
   'Jan',
@@ -254,6 +249,7 @@ class PrimaryButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(small ? 10 : 12),
       ),
       textStyle: TextStyle(
+        fontFamily: AppFonts.body,
         fontSize: small ? 13 : 16,
         fontWeight: FontWeight.w600,
       ),

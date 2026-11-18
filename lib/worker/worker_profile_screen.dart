@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../manager/manager_ui.dart' show MField;
 import 'worker_ui.dart';
+import '../theme/app_text.dart';
 
 class WorkerProfileScreen extends StatefulWidget {
   const WorkerProfileScreen({super.key});
@@ -146,6 +147,7 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                 foregroundColor: WColors.primary,
                 shape: const StadiumBorder(),
                 textStyle: const TextStyle(
+                  fontFamily: AppFonts.body,
                   fontSize: 13.5,
                   fontWeight: FontWeight.w600,
                 ),

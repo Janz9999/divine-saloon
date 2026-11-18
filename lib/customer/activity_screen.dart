@@ -15,6 +15,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'booking_store.dart';
 import 'salon_messages.dart';
+import '../theme/app_text.dart';
 
 // Colours from the design
 const Color _bg = AppColors.bg;
@@ -101,8 +102,9 @@ class ActivityScreen extends StatelessWidget {
                 const Text(
                   'Activity',
                   style: TextStyle(
+                    fontFamily: AppFonts.heading,
                     fontSize: 28,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w400,
                     color: _text,
                   ),
                 ),
@@ -175,8 +177,9 @@ class _EmptyBookings extends StatelessWidget {
           const Text(
             'No bookings',
             style: TextStyle(
+              fontFamily: AppFonts.heading,
               fontSize: 20,
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w400,
               color: _text,
             ),
           ),
@@ -386,8 +389,9 @@ class BookingDetailScreen extends StatelessWidget {
               Text(
                 _headerTitle(booking),
                 style: const TextStyle(
+                  fontFamily: AppFonts.heading,
                   fontSize: 30,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w400,
                   color: _text,
                   height: 1.15,
                 ),

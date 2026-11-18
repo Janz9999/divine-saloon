@@ -8,6 +8,7 @@ import '../customer/booking_store.dart';
 import '../manager/manager_ui.dart' show timeAgo;
 import 'worker_mark_done_screen.dart';
 import 'worker_ui.dart';
+import '../theme/app_text.dart';
 
 class WorkerAlertsScreen extends StatelessWidget {
   const WorkerAlertsScreen({super.key});
@@ -31,8 +32,9 @@ class WorkerAlertsScreen extends StatelessWidget {
                   child: Text(
                     'Alerts',
                     style: TextStyle(
+                      fontFamily: AppFonts.heading,
                       fontSize: 28,
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w400,
                       color: WColors.text,
                     ),
                   ),

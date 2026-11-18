@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 
 import '../customer/booking_store.dart';
 import 'manager_ui.dart';
+import '../theme/app_text.dart';
 
 /// Accepts the booking, then offers to send the customer a confirmation message.
 Future<void> acceptBooking(BuildContext context, Booking b) async {
@@ -476,8 +477,9 @@ class ManagerBookingDetailScreen extends StatelessWidget {
                             Text(
                               b.customerName,
                               style: const TextStyle(
+                                fontFamily: AppFonts.heading,
                                 fontSize: 21,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w400,
                                 color: MColors.text,
                               ),
                             ),
@@ -560,8 +562,9 @@ class ManagerBookingDetailScreen extends StatelessWidget {
                       Text(
                         '${mWeekdaysLong[d.weekday - 1]}, ${d.day} ${mMonthsLong[d.month - 1]}',
                         style: const TextStyle(
+                          fontFamily: AppFonts.heading,
                           fontSize: 22,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w400,
                           color: Colors.white,
                         ),
                       ),

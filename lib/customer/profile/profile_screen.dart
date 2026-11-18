@@ -15,6 +15,7 @@ import 'profile_store.dart';
 import 'profile_ui.dart';
 import 'rewards_screen.dart';
 import 'settings_screen.dart';
+import '../../theme/app_text.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -103,6 +104,7 @@ class ProfileScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     textStyle: const TextStyle(
+                      fontFamily: AppFonts.body,
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
                     ),
@@ -235,7 +237,10 @@ class _RewardsCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   padding: const EdgeInsets.symmetric(horizontal: 14),
-                  textStyle: const TextStyle(fontSize: 12.5),
+                  textStyle: const TextStyle(
+                    fontFamily: AppFonts.body,
+                    fontSize: 12.5,
+                  ),
                 ),
                 child: const Text('View rewards'),
               ),

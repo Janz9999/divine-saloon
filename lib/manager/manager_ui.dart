@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../customer/booking_store.dart';
 import 'manager_store.dart';
+import '../theme/app_text.dart';
 
 class MColors {
   MColors._();
@@ -119,15 +120,17 @@ void mSnack(BuildContext context, String text) {
 // ───────────────────────── Text styles ─────────────────────────
 
 const TextStyle mTitle = TextStyle(
+  fontFamily: AppFonts.heading,
   fontSize: 32,
-  fontWeight: FontWeight.w700,
+  fontWeight: FontWeight.w400,
   color: MColors.text,
   height: 1.1,
 );
 const TextStyle mSubtitle = TextStyle(fontSize: 15, color: MColors.muted);
 const TextStyle mSection = TextStyle(
+  fontFamily: AppFonts.heading,
   fontSize: 21,
-  fontWeight: FontWeight.w600,
+  fontWeight: FontWeight.w400,
   color: MColors.text,
 );
 const TextStyle mCaps = TextStyle(
@@ -254,6 +257,7 @@ class MPrimaryButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(compact ? 30 : 16),
       ),
       textStyle: TextStyle(
+        fontFamily: AppFonts.body,
         fontSize: compact ? 15 : 17,
         fontWeight: FontWeight.w600,
       ),
@@ -282,7 +286,11 @@ class MSecondaryButton extends StatelessWidget {
       foregroundColor: MColors.text,
       minimumSize: const Size.fromHeight(44),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-      textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+      textStyle: const TextStyle(
+        fontFamily: AppFonts.body,
+        fontSize: 15,
+        fontWeight: FontWeight.w500,
+      ),
     ),
     child: Text(label),
   );

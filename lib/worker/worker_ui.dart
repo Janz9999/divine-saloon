@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import '../customer/booking_store.dart';
 import '../data/session.dart';
 import '../manager/manager_ui.dart' show initialsOf;
+import '../theme/app_text.dart';
 
 class WColors {
   WColors._();
@@ -262,7 +263,11 @@ class WPrimaryButton extends StatelessWidget {
       disabledForegroundColor: Colors.white,
       minimumSize: const Size.fromHeight(54),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-      textStyle: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+      textStyle: const TextStyle(
+        fontFamily: AppFonts.body,
+        fontSize: 17,
+        fontWeight: FontWeight.w600,
+      ),
     ),
     child: Row(
       mainAxisSize: MainAxisSize.min,
@@ -385,8 +390,9 @@ class WBackHeader extends StatelessWidget {
         child: Text(
           title,
           style: const TextStyle(
+            fontFamily: AppFonts.heading,
             fontSize: 22,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w400,
             color: WColors.text,
           ),
         ),

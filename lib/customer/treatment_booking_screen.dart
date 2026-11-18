@@ -10,6 +10,7 @@ import 'activity_screen.dart';
 
 import 'payment_screen.dart';
 import 'service_image.dart';
+import '../theme/app_text.dart';
 
 /// Details, price list and date/time booking for one service card
 /// (opened from [CategoryDetailScreen] or straight from the home screen).
@@ -255,8 +256,9 @@ class _TreatmentBookingScreenState extends State<TreatmentBookingScreen> {
         Text(
           (_card['title'] as String).toUpperCase(),
           style: const TextStyle(
+            fontFamily: AppFonts.heading,
             fontSize: 20,
-            fontWeight: FontWeight.w800,
+            fontWeight: FontWeight.w400,
             letterSpacing: 0.3,
           ),
         ),

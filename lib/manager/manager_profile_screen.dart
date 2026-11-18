@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 
 import 'manager_store.dart';
 import 'manager_ui.dart';
+import '../theme/app_text.dart';
 
 class ManagerProfileScreen extends StatefulWidget {
   const ManagerProfileScreen({super.key});
@@ -119,8 +120,9 @@ class _ManagerProfileScreenState extends State<ManagerProfileScreen> {
                         Text(
                           _p.fullName,
                           style: const TextStyle(
+                            fontFamily: AppFonts.heading,
                             fontSize: 24,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w400,
                             color: MColors.text,
                           ),
                         ),

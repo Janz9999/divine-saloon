@@ -11,6 +11,7 @@ import 'activity_screen.dart';
 import 'service_catalog.dart';
 import 'service_image.dart';
 import 'treatment_booking_screen.dart';
+import '../theme/app_text.dart';
 
 /// Opens the right screen for a home-screen category:
 /// one card  → straight to the price list / booking screen,
@@ -134,8 +135,9 @@ class CategoryDetailScreen extends StatelessWidget {
           Text(
             category['title'] as String,
             style: const TextStyle(
+              fontFamily: AppFonts.heading,
               fontSize: 20,
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w400,
               letterSpacing: 0.3,
             ),
           ),

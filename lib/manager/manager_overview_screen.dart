@@ -13,6 +13,7 @@ import '../customer/booking_store.dart';
 import 'manager_booking_screens.dart';
 import 'manager_store.dart';
 import 'manager_ui.dart';
+import '../theme/app_text.dart';
 
 class ManagerOverviewScreen extends StatefulWidget {
   final VoidCallback onOpenAlerts;
@@ -58,8 +59,9 @@ class _ManagerOverviewScreenState extends State<ManagerOverviewScreen> {
                   child: Text(
                     'Business overview',
                     style: TextStyle(
+                      fontFamily: AppFonts.heading,
                       fontSize: 26,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w400,
                       color: MColors.text,
                     ),
                   ),
@@ -148,8 +150,9 @@ class _Header extends StatelessWidget {
             Text(
               name,
               style: const TextStyle(
+                fontFamily: AppFonts.heading,
                 fontSize: 27,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w400,
                 color: MColors.text,
               ),
             ),

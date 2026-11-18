@@ -15,6 +15,7 @@ import 'customer/customer_nav.dart';
 import 'theme/app_colors.dart';
 import 'manager/manager_shell.dart';
 import 'worker/worker_shell.dart';
+import 'theme/app_text.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -108,7 +109,11 @@ class _StartupLoading extends StatelessWidget {
         Text(
           'Divine Aesthetics & Beauty',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+          style: TextStyle(
+            fontFamily: AppFonts.heading,
+            fontSize: 22,
+            fontWeight: FontWeight.w400,
+          ),
         ),
         SizedBox(height: 28),
         SizedBox(
@@ -150,7 +155,11 @@ class _StartupError extends StatelessWidget {
         const Text(
           'Couldn\'t start the app',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+          style: TextStyle(
+            fontFamily: AppFonts.heading,
+            fontSize: 20,
+            fontWeight: FontWeight.w400,
+          ),
         ),
         const SizedBox(height: 10),
         Text(
@@ -267,9 +276,10 @@ class WelcomeScreen extends StatelessWidget {
                   const Text(
                     'Look Great,\nFeel Confident',
                     style: TextStyle(
+                      fontFamily: AppFonts.heading,
                       color: Colors.white,
                       fontSize: 38,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w400,
                       height: 1.15,
                       letterSpacing: -0.5,
                     ),
@@ -370,6 +380,7 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   bool _isLoading = false;
+  bool _isSendingReset = false;
 
   void _showError(String message, {Color color = Colors.red}) {
     if (!mounted) return;
@@ -397,6 +408,58 @@ class _AuthScreenState extends State<AuthScreen> {
         return 'No internet connection. Please try again.';
       default:
         return e.message ?? 'Login failed. Please try again.';
+    }
+  }
+
+  // Forgot password: email a reset link to the address in the email field.
+  Future<void> _handleForgotPassword() async {
+    if (_isSendingReset) return;
+    final email = _emailController.text.trim();
+
+    if (email.isEmpty) {
+      _showError(
+        'Enter your email address above, then tap "Forgot password?" again.',
+        color: Colors.orange,
+      );
+      return;
+    }
+
+    setState(() => _isSendingReset = true);
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      // Same message whether or not the account exists, so the form can't be
+      // used to find out which emails are registered.
+      _showError(
+        'If an account exists for $email, a password reset link is on its way. '
+        'Check your inbox (and spam folder).',
+        color: Colors.green,
+      );
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'user-not-found':
+          // Treat like success (see above).
+          _showError(
+            'If an account exists for $email, a password reset link is on its way. '
+            'Check your inbox (and spam folder).',
+            color: Colors.green,
+          );
+        case 'invalid-email':
+          _showError('That email address is not valid.');
+        case 'too-many-requests':
+          _showError(
+            'Too many requests. Please wait a few minutes and try again.',
+          );
+        case 'network-request-failed':
+          _showError('No internet connection. Please try again.');
+        default:
+          _showError(
+            e.message ?? 'Could not send the reset email. Please try again.',
+          );
+      }
+    } catch (_) {
+      _showError('Could not send the reset email. Please try again.');
+    } finally {
+      if (mounted) setState(() => _isSendingReset = false);
     }
   }
 
@@ -768,9 +831,11 @@ class _AuthScreenState extends State<AuthScreen> {
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            'Forgot password?',
+                          onPressed: _isSendingReset || _isLoading
+                              ? null
+                              : _handleForgotPassword,
+                          child: Text(
+                            _isSendingReset ? 'Sending…' : 'Forgot password?',
                             style: TextStyle(
                               color: Colors.white70,
                               fontSize: 12,

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'profile_store.dart';
 import 'profile_ui.dart';
+import '../../theme/app_text.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -108,6 +109,7 @@ class SettingsScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               textStyle: const TextStyle(
+                fontFamily: AppFonts.body,
                 fontSize: 15.5,
                 fontWeight: FontWeight.w600,
               ),
